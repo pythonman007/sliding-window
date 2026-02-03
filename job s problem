@@ -1,0 +1,21 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+def jobScheduling(jobs):
+    n = len(jobs)
+    jobs.sort(key = lambda x:-x[2]) 
+    maxDeadLine = 0 
+    for row in range(0,n):
+        maxDeadLine = max(maxDeadLine,jobs[row][1])
+    days = [-1]*(maxDeadLine+1)
+    maxProfit = 0 
+    cnt = 0 
+    for row in range(0,n):
+        for j in range(jobs[row][1],0,-1):
+            if(days[j] == -1):
+                days[j] = jobs[row][0]
+                maxProfit+=jobs[row][2]
+                cnt+=1 
+                break 
+    return [cnt,maxProfit]
